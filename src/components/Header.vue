@@ -16,12 +16,12 @@ const searchih=ref(false)
  </h1>
  </div>
  <input v-if="searchih" id="bar" type="text" placeholder="Pretraži destinacije...">
- <ul id="nav">
-    <li class="dugme" id="prvi">Pocetna</li>
-    <li class="dugme">Liste</li>
-    <li class="dugme">Letovi</li>
-    <li class="dugme" id="zadnji">O nama</li>
- </ul>
+ <div id="nav">
+    <RouterLink to="/" class="nav-link"><p class="dugme">Pocetna</p></RouterLink>
+    <RouterLink to="/liste" class="nav-link"><p class="dugme">Liste</p></RouterLink>
+    <RouterLink to="/letovi" class="nav-link"><p class="dugme">Letovi</p></RouterLink>
+    <RouterLink to="/onama" class="nav-link"><p class="dugme">O nama</p></RouterLink>
+ </div>
  </div>
  <div class="ispod">
  </div>
@@ -88,25 +88,23 @@ const searchih=ref(false)
       display:flex;
       flex-direction:row;
       width:100%;
-      align-items:center;
-      padding:0;
       margin-bottom:-25px;
-      list-style:none;
+      list-style: none;
       justify-content:space-between;
       background-color:rgb(40, 90, 140);
       border-radius:15px;
-      overflow:hidden;
+      padding: 0px 100px 0px 100px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
    }
    
    .dugme
    {
       padding:20px;
-      gap:30px;
       color:white;
       cursor:pointer;
       transition:0.3s;
       font-family:'Roboto',sans-serif;
+      margin: 0px;
    }
    .dugme:hover
    {
@@ -114,18 +112,12 @@ const searchih=ref(false)
       background-color:rgb(50, 110, 170);
    }
 
- .sadrzaj {
-  min-height: 200vh;
-  padding: 40px;
-  background-color: white;
-  position:relative;
-}
+   #zadnji{
+      
+   }
 
-#prvi{
-   margin-left:10%;
-}
-
-#zadnji{
-   margin-right:10%;
+.nav-link{
+   color:white !important;
+   text-decoration:none !important;
 }
 </style>
