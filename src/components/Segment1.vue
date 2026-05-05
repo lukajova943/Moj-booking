@@ -41,7 +41,7 @@ import Button from './Button.vue';
       <div class="rating">⭐ 4.2</div>
       <div class="info-overlay">
         <div class="grad">Cape Town: 🇿🇦</div>
-        <div class="nocenja">3200</div>
+        <div class="nocenja">3200 noćenja</div>
       </div>
       </div>
       <Button/>
@@ -99,10 +99,12 @@ import Button from './Button.vue';
     font-size:20px;
     align-items:center;
     margin-bottom:5px;
+    cursor:default;
   }
   .nocenja{
     font-size:18px;
     opacity:0.9;
+    cursor:default;
   }
   .rating{
   position: absolute;
@@ -158,7 +160,7 @@ h1{
   }
 
   #Berlin{
-    background-image: url('https://rentabus.ba/api/v1/public/arrangements/uploads/arrangements/covers/q8dz9gonl4.png')
+    background-image: url('../assets/Berlin.webp')
   }
   #Zagreb{
     background-image: url('https://i.natgeofe.com/n/a11e9ead-955f-4a4e-977c-d1b2f104ee75/zagrebgettyimages-1144074611hr.jpg')

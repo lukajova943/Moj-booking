@@ -1,5 +1,4 @@
 <script setup>
-import HelloWorld from '../components/HelloWorld.vue'
 import Segment1 from '../components/Segment1.vue'
 import Newsletter from '../components/Newsletter.vue'
 </script>
