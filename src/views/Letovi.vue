@@ -1,70 +1,47 @@
 <script setup>
+import { supabase } from '../../utils/supabase';
+import { ref, onMounted } from 'vue';
+import Header from '../components/Header.vue';
+
+
+const letovi = ref([])
+
+async function dohvatiLetove(){
+  const { data,error } = await supabase
+   .from('Letovi')
+   .select('Destinacija, Datum,Vrijeme,AvioKompanija, Status(Vrijednost)')
+
+  if (error) {
+    console.log(error.message)
+    return
+  }
+
+  console.log(data)
+
+  letovi.value = data
+}
+
+onMounted(() => { dohvatiLetove()})
 </script>
 
 <template>
+  <Header />
   <div id="nazivi">
     <p>Destinacija</p>
     <p>Datum</p>
     <p>Vrijeme</p>
     <p>Avio-kompanija</p>
-    <p>Status</p>
+    <p class="status">Status</p>
   </div>
 
-  <div class="let-red">
-    <p>Berlin (BER)</p>
-    <p>15.05.2026.</p>
-    <p>12:45</p>
-    <p>Lufthansa</p>
-    <p class="status">Na vrijeme</p>
+  <div class="let-red" v-for="leti in letovi">
+    <p>{{ leti.Destinacija }}</p>
+    <p>{{ leti.Datum }}.</p>
+    <p>{{ leti.Vrijeme }}</p>
+    <p>{{leti.AvioKompanija}}</p>
+    <div><p>{{ leti.Status.Vrijednost }}</p></div>
   </div>
 
-  <div class="let-red">
-    <p>Zagreb (ZAG)</p>
-    <p>16.05.2026.</p>
-    <p>09:15</p>
-    <p>Croatia Airlines</p>
-    <p class="status">Kasni</p>
-  </div>
-
-  <div class="let-red">
-    <p>Gdansk (GDA)</p>
-    <p>19.05.2026.</p>
-    <p>14:00</p>
-    <p>Ryan Air</p>
-    <p class="status">Na vrijeme</p>
-  </div>
-
-  <div class="let-red">
-    <p>Dubai (DUB)</p>
-    <p>13.05.2026.</p>
-    <p>11:15</p>
-    <p>Emirates</p>
-    <p class="status">Na vrijeme</p>
-  </div>
-
-  <div class="let-red">
-    <p>Seoul (SEO)</p>
-    <p>16.05.2026.</p>
-    <p>17:00</p>
-    <p>Turkish Airlines</p>
-    <p class="status">Kasni</p>
-  </div>
-
-  <div class="let-red">
-    <p>Nice (NIC)</p>
-    <p>11.05.2026.</p>
-    <p>08:00</p>
-    <p>Air France</p>
-    <p class="status">Na vrijeme</p>
-  </div>
-
-  <div class="let-red">
-    <p>Riyadh (RIY)</p>
-    <p>14.05.2026.</p>
-    <p>12:30</p>
-    <p>Emirates</p>
-    <p class="status">Na vrijeme</p>
-  </div>
 
 </template>
 

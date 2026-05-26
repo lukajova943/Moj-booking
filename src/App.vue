@@ -1,11 +1,14 @@
 <script setup>
 import Header from './components/Header.vue';
 import { RouterView } from 'vue-router';
+
+import { ref, onMounted } from 'vue'
+import { supabase } from '../utils/supabase'
+
 </script>
 
 <template>
   <div id="app">
-  <Header />
   <main>
     <RouterView />
   </main>
@@ -19,14 +22,14 @@ import { RouterView } from 'vue-router';
 
 html, body {
   height: 100%;
-  overflow: hidden;
+  min-height:100%;
+  overflow-y:auto;
 }
 
 #app {
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 </style>

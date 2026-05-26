@@ -29,6 +29,8 @@ const searchih=ref(false)
 
 <style>
 
+   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@600&family=Inter:wght@800&display=swap');
+
    #glavno
    {
      background:linear-gradient( 
@@ -58,9 +60,9 @@ const searchih=ref(false)
       }
    #naslov
    {
-
+      font-family: 'Poppins', sans-serif;
       color:white;
-      font-family:Tahoma;
+      text-shadow:2px 2px 4px rgba(0,0,0,0.3);
    }
    #gg
    {
@@ -112,9 +114,6 @@ const searchih=ref(false)
       background-color:rgb(50, 110, 170);
    }
 
-   #zadnji{
-      
-   }
 
 .nav-link{
    color:white !important;
