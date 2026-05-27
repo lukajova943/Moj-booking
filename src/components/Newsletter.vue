@@ -278,7 +278,9 @@ watch(
   border-radius: 10px;
   cursor: pointer;
 }
-
+.akcija-gumb-modal:hover{
+  background-color: #005999;
+}
 .zatvori-gumb:hover {
   background-color: #d4d4d4;
 }

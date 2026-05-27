@@ -1,19 +1,59 @@
 <script setup>
-import { ref } from 'vue'
+import { ref,onMounted,onUnmounted,computed } from 'vue'
+import { supabase } from '../../utils/supabase';
+
 const searchih=ref(false)
+const username=ref('')
+
+let authListener = null
+
   function search()
    {
       searchih.value = !searchih.value;
    }
 
+const userInitials = computed(() => {
+   if(!username.value) return '?'
+   return username.value.slice(0, 2).toUpperCase()
+})
+
+const logOut = async () => {
+   const { error } = await supabase.auth.signOut()
+   if( error ) console.error('Error logging out:',error.message)
+}
+
+onMounted(() => {
+  const { data } = supabase.auth.onAuthStateChange((event, session) => {
+    if (session?.user) {
+      username.value = session.user.user_metadata.username || ''
+    } else {
+      username.value = ''
+    }
+  })
+  authListener = data.subscription
+})
+
+onUnmounted(() => {
+  if (authListener) {
+    authListener.unsubscribe()
+  }
+})
+
 </script>
 
 <template>
 <div id="glavno">
-   <div id="gg">
+<div id="gg">
  <h1 id="naslov">Booking
    <img  @click="search()"id="search" src="../assets/search.png">
  </h1>
+
+   <div v-if="username" class="user-profile">
+      <div class="avatar" >{{ userInitials }}</div>
+      <span class="username-text">{{ username }}</span>
+      <span class="line">|</span>
+      <button @click="logOut" class="button-logout">Odjavi se</button>
+   </div>
  </div>
  <input v-if="searchih" id="bar" type="text" placeholder="Pretraži destinacije...">
  <div id="nav">
@@ -67,6 +107,58 @@ const searchih=ref(false)
    #gg
    {
       align-items:center;
+      display:flex;
+      position:relative;
+      justify-content: center;
+      width:100%;
+   }
+   .user-profile{
+      display:flex;
+      flex-direction: row;
+      position:absolute;
+      right:0;
+      gap:15px;
+      padding:7px;
+      padding-left:12px;
+      border-radius:50px;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+   }
+   .avatar{
+      background-color:white;
+      color: #285a8c;            
+      border-radius: 50%;
+      height:35px;
+      width:35px;
+      align-content: center;
+      text-align:center;
+      cursor:pointer;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size:18px;
+   }
+   .button-logout{
+      background:none;
+      border:none;
+      text-decoration: underline;
+      color:rgb(255, 255, 255);
+      cursor:pointer;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      transform: translateX(-5px);
+      }
+   .line{
+      color:rgb(255, 255, 255);
+      align-content: center;
+      font-size:28px;
+   }
+   .username-text{
+      color:rgb(255, 255, 255);
+      align-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   }
+   .button-logout:hover {
+      color:rgba(220, 225, 230, 0.826);
+      transition:0.3s;
    }
    #bar
    {
@@ -84,6 +176,7 @@ const searchih=ref(false)
       margin-top:8px;
       margin-left:10px;
       cursor:pointer;
+      transform: translateX(15px);
    }
    #nav
    {
