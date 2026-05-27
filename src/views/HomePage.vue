@@ -1,6 +1,5 @@
 <script setup>
 import Segment1 from '../components/Segment1.vue'
-import Newsletter from '../components/Newsletter.vue'
 import Header from '../components/Header.vue';
 import Ljetne from '../components/Ljetne.vue';
 </script>
@@ -9,7 +8,6 @@ import Ljetne from '../components/Ljetne.vue';
   <Header />
   <div class="main-content">
     <Segment1 />
-    <Newsletter />
     <Ljetne />
   </div>
 </template>

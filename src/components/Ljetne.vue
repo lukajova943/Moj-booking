@@ -25,7 +25,7 @@
 </script>
 
 <template>
-<h1 id="popular">Popularne ljetne destinacije</h1>
+<h1 id="popular">Inspiracija za ljeto</h1>
 <div id="glavni">
   <div v-for="dest in ljetneDestinacije" :key="dest.id" class="kartica-wrap">
     <div class="dest" :style="{ backgroundImage: `url(${dest.Slika_url})` }">
@@ -139,4 +139,5 @@ h1{
     height:100%;
     background:linear-gradient(to bottom,rgba(0, 0, 0, 0)50%,rgba(0, 0, 0, 1) 100%)
   }
+
 </style>
